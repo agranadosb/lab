@@ -1,0 +1,79 @@
+{
+  "name": "lab",
+  "dockerFile": "Dockerfile",
+  "runArgs": [
+    "--env-file",
+    ".devcontainer/.env",
+    "--add-host=host.docker.internal:host-gateway",
+    "--gpus=all"
+  ],
+  "postCreateCommand": ".devcontainer/post-create.sh",
+  "postAttachCommand": ". .venv/bin/activate",
+  "mounts": [
+    "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
+  ],
+  "remoteUser": "lab",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "DavidAnson.vscode-markdownlint",
+        "eamodio.gitlens",
+        "GitHub.copilot",
+        "GitHub.copilot-chat",
+        "ms-python.python",
+        "ms-azuretools.vscode-docker",
+        "tamasfe.even-better-toml",
+        "vscode-icons-team.vscode-icons",
+        "pulumi.pulumi-lsp-client",
+        "charliermarsh.ruff"
+      ],
+      "settings": {
+        "files.exclude": {
+          "**/.git": true,
+          "**/__pycache__": true,
+          "**/__pypackages__": true,
+          "**/*.egg-info": true,
+          "**/.coverage": true,
+          "**/.idea": true,
+          "**/.pytest_cache": true,
+          "**/.ruff_cache": true,
+          "**/.pdm-python": true
+        },
+        "files.autoSave": "afterDelay",
+        "files.trimTrailingWhitespace": true,
+        "files.insertFinalNewline": true,
+        "python.analysis.indexing": true,
+        "python.languageServer": "Pylance",
+        "python.analysis.autoImportCompletions": true,
+        "python.analysis.typeCheckingMode": "basic",
+        "python.analysis.importFormat": "absolute",
+        "python.analysis.autoSearchPaths": true,
+        "python.testing.pytestEnabled": true,
+        "python.testing.unittestEnabled": false,
+        "python.testing.pytestArgs": ["tests"],
+        "python.terminal.activateEnvInCurrentTerminal": true,
+        "python.defaultInterpreterPath": ".venv/bin/python",
+        "python.pythonPath": ".venv/bin/python",
+        "python.analysis.diagnosticSeverityOverrides": {
+          "reportGeneralTypeIssues": "none",
+          "reportCallIssue": "none",
+          "reportArgumentType": "none",
+          "reportAttributeAccessIssue": "none",
+          "reportReturnType": "none"
+        },
+        "terminal.integrated.defaultProfile.linux": "zsh",
+
+        "terminal.integrated.profiles.linux": {
+          "zsh": {
+            "path": "zsh",
+            "icon": "terminal-bash"
+          },
+          "bash": {
+            "path": "bash",
+            "icon": "terminal-bash"
+          }
+        }
+      }
+    }
+  }
+}
